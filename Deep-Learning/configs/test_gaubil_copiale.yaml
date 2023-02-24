@@ -1,0 +1,11 @@
+defaults:
+  - dataset: copiale
+  - training: baseline
+  - model: baseline
+  - reassignment: baseline
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+  verbose: False

@@ -1,0 +1,33 @@
+defaults:
+  - training: defaults
+  - model: defaults
+  - dataset: google
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+  verbose: False
+
+tag: unsupervised
+
+dataset:
+  google:
+    supervised: False
+    crop_width: 128
+
+model:
+  background:
+    init:
+      constant: [0.3662476,0.22495858,0.18312915]
+
+  sprites:
+    gen_type: unet
+
+training:
+  num_epochs: 1000
+  log:
+    val:
+      error_rate:
+        every: 0
+        last: True

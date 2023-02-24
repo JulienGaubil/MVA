@@ -1,0 +1,11 @@
+defaults:
+  - dataset: fontenay
+  - training: baseline
+  - model: baseline
+  - reassignment: baseline
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+  verbose: False

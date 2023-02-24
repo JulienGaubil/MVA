@@ -1,0 +1,144 @@
+dataset:
+  path: fontenay_2
+  alias: fontenay2
+  crop_width: 128
+  N_min: 0
+  W_max: .inf
+training:
+  num_epochs: 1600
+  batch_size: 4
+  optimizer:
+    name: adamw
+    lr: 0.0001
+    transformation:
+      weight_decay: 1.0e-06
+    encoder:
+      weight_decay: 1.0e-06
+  scheduler:
+    name: multi_step
+    gamma:
+    - 1
+    - 0.1
+    milestones:
+    - 150000
+    - 158000
+  log:
+    save:
+      every: 1
+    train:
+      reconstruction:
+        every: 2
+      images:
+        every: 1
+        how_many: 20
+    val:
+      reconstruction:
+        every: 2
+      error_rate:
+        every: 0
+        only-last: true
+        eval-best: recons_train
+        kargs:
+          dataloader_batch_size: 4
+    qualitative: true
+  device: 1
+  n_workers: 16
+  seed: 97312
+  supervised: true
+  flush_mem: true
+  flush_per: 3
+model:
+  encoder:
+    H: 64
+    C: 3
+    name: resnet32
+    pooling_on_width: 4
+  background:
+    size:
+    - 32
+    - 64
+    use_clamp: soft
+    init:
+      constant: 0.7
+      freeze: true
+  sprites:
+    'n': 38
+    size:
+    - 32
+    - 32
+    add_empty: true
+    use_clamp: soft
+    init:
+      mask:
+        gaussian: 6
+      color:
+        freeze: true
+        constant: 0.5
+  transformation:
+    sprites:
+      ops:
+      - identity
+    layer:
+      ops:
+      - color
+      - position
+      color:
+        color_bias: false
+        use_clamp: soft
+      position:
+        scale: 1.0
+        center: true
+        parametrization: exp
+        padding_mode: zeros
+    background:
+      ops:
+      - color
+      - position
+      color:
+        color_bias: false
+        use_clamp: soft
+      position:
+        scale: 1.0
+        use_canvas: true
+        parametrization: sinh
+        padding_mode: border
+    canvas_size:
+    - 64
+    - 128
+  selection:
+    iter:
+    - 3
+    - 3
+    lambda_empty_sprite: 0.005
+    distance_weighting: true
+  loss:
+    gamma_penalization: 0
+    gaussian_weighting: false
+    sigma_gaussian: 7
+    ctc_factor: 0.1
+    beta_sparse: 0
+    beta_reg: 0
+  window:
+    size: 5
+  compositor:
+    type: layered
+reassignment:
+  milestone:
+    name: per-iter
+    num_iters: 20
+  sprite_removal:
+    ops:
+    - usage
+    - surface
+    usage:
+      threshold: 1.0e-05
+    surface:
+      min_surface: 25
+  sprite_creation:
+    ops:
+    - metric
+    metric:
+      reassign_by: proportions
+      cycle: prob
+      add_noise: true
+run_dir: /home/jgaubil/codes/ltw-marionette/runs/fontenay/supervised/MarioNette/blank_sprite/test/ctc_-1

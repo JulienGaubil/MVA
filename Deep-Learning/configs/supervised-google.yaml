@@ -1,0 +1,26 @@
+defaults:
+  - training: defaults
+  - model: defaults
+  - dataset: google
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+  verbose: False
+
+tag: supervised
+
+dataset:
+  google:
+    supervised: True
+
+model:
+  background:
+    init:
+      constant: [0.3662476,0.22495858,0.18312915]
+
+training:
+  n_workers: 8
+  batch_size: 16
+  num_epochs: 100

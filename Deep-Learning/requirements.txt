@@ -1,0 +1,14 @@
+editdistance
+einops
+pandas
+numpy
+scipy
+hydra-core
+scikit-learn
+tqdm
+matplotlib
+seaborn
+coloredlogs
+tensorboard
+colorcet
+opencv-python

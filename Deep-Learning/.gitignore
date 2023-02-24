@@ -1,0 +1,10 @@
+/datasets/
+/runs/
+/scripts/mathieu/
+/jeanzay/
+/outputs/
+/.local_scripts/
+/.vscode/
+*-checkpoint.ipynb
+*.pyc
+trainer.log
