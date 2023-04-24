@@ -1,4 +1,7 @@
-# Kaggle Challenge repository for Kernel methods for Machine Learning MVA course, spring 2023
+# Kaggle Challenge for Kernel methods for Machine Learning
+
+ M2 MVA course, spring 2023 for the group Vincent Garot & Julien Gaubil.
+
 This repository contains the graph kernels and kernel learning algorithms implemented for the Kaggle project for the course Kernel Methods for Machine Learning, spring 2023 for the Master MVA. More details about [kernels](https://github.com/JulienGaubil/MVA/tree/main/Kernel-Methods-ML/kernels) and [models](https://github.com/JulienGaubil/MVA/tree/main/Kernel-Methods-ML/models) implementations can be found in their related documentation.
 
 # Install
